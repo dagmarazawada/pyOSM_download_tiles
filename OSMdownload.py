@@ -54,6 +54,15 @@ def downloadTiles(x,y,tilezoom):
         urllib.urlretrieve(pngurl, tilenr+".png")
         print 'tile ' + tilenr + " downloaded"
 
+'''
+if tilezoom < 10:
+  ...
+elif tilezoom < 15:
+  ...
+else:
+  ...
+  
+'''
 
 #downloadTiles(6)
 

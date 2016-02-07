@@ -1,4 +1,4 @@
-print "-- OSM download --"
+print "-- OSM download py --"
 
 import os
 import math
@@ -29,6 +29,7 @@ def createDir(tilezoom,xtile):
 def downloadTiles(x,y,tilezoom):
 
   tile = deg2num(x,y,tilezoom)
+  maptype = "mapbox.streets/" # or: mapbox.satellite/ mapbox.streets-satellite ... (mapbox doc)
   xtile = tile[0]
   ytile = tile[1]
 
@@ -39,7 +40,7 @@ def downloadTiles(x,y,tilezoom):
       for y in range(ytile-1,ytile+2):
         #print y
         tilenr = str(tilezoom) + "/" + str(x) + "/" + str(y)
-        pngurl = "https://api.tiles.mapbox.com/v4/mapbox.streets/"+ tilenr +".png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw"
+        pngurl = "https://api.tiles.mapbox.com/v4/" + maptype + tilenr +".png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw"
         urllib.urlretrieve(pngurl, tilenr+".png")
         print 'tile ' + tilenr + " downloaded"
   else:
@@ -49,14 +50,14 @@ def downloadTiles(x,y,tilezoom):
       for y in range(ytile-tilezoom,ytile+tilezoom):
         #print y
         tilenr = str(tilezoom) + "/" + str(x) + "/" + str(y)
-        pngurl = "https://api.tiles.mapbox.com/v4/mapbox.streets/"+ tilenr +".png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw"
+        pngurl = "https://api.tiles.mapbox.com/v4/" + maptype + tilenr +".png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw"
         urllib.urlretrieve(pngurl, tilenr+".png")
         print 'tile ' + tilenr + " downloaded"
 
 
 #downloadTiles(6)
 
-# shore
+# warsaw shore
 for num in range(6,19):
   x = 52.23
   y = 21.01
@@ -64,35 +65,7 @@ for num in range(6,19):
   print "tilezoom: " + str(num)
   downloadTiles(x,y,num)
 
-# cracow
-for num in range(6,19):
-  x = 50.06
-  y = 19.94
-  print "-- downloading tiles for (" + str(x) + ", " + str(y) +") ..."
-  print "tilezoom: " + str(num)
-  downloadTiles(x,y,num)
-
-# whitestock
-for num in range(6,19):
-  x = 53.13
-  y = 23.15
-  print "-- downloading tiles for (" + str(x) + ", " + str(y) +") ..."
-  print "tilezoom: " + str(num)
-  downloadTiles(x,y,num)
-
-# meeting
-for num in range(6,19):
-  x = 52.41
-  y = 16.93
-  print "-- downloading tiles for (" + str(x) + ", " + str(y) +") ..."
-  print "tilezoom: " + str(num)
-  downloadTiles(x,y,num)
-
-# wroclove
-for num in range(6,19):
-  x = 51.11
-  y = 17.03
-  print "-- downloading tiles for (" + str(x) + ", " + str(y) +") ..."
-  print "tilezoom: " + str(num)
-  downloadTiles(x,y,num)
+''' 
+eventually add other cracow x = 50.06 y = 19.94 whitestock x = 53.13 y = 23.15 meeting place  x = 52.41 y = 16.93 wroclove x = 51.11 y = 17.03
+'''
 
